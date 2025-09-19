@@ -1,0 +1,22 @@
+body {
+  background-color: #e1c7c772;
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 30px;
+}
+button {
+  background-color: #c476d2c2;
+  color: white;
+  padding: 3px 6px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.hidden {
+  display: none;
+  user-select: none;
+  pointer-events: none;
+}
+li {
+   margin-bottom: 5px;
+}
