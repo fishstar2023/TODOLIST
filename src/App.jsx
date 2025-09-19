@@ -92,10 +92,19 @@ function App() {
         onChange={(e) => setInputValue(e.target.value)}
       />
       <button onClick={addTodo}>Submit</button>
+
       {activePomodoro && (
-       <div>
-         <h3>Pomodoro for: {activePomodoro.task}</h3>
-         <PomodoroTimer />
+        <div className="pomodoro-container">
+          <div className="pomodoro-header">
+            <h3 className="pomodoro-header h3">
+              🍅Pomodoro for: {activePomodoro.task}
+            </h3>
+           <button 
+            className="pomodoro-close" 
+            onClick={() => setActivePomodoro(null)}   
+              >✖</button>
+       </div>
+       <PomodoroTimer />
        </div>
      )}
     </div>

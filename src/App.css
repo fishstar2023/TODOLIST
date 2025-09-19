@@ -16,6 +16,12 @@ h1 {
   margin-bottom: 20px;
   text-align: center;
 }
+h3 {
+  font-size: 1.2rem;
+  color: #a04939;
+  margin-bottom: 10px;
+  text-align: left;
+}
 
 /* Todo List */
 ol#list {
