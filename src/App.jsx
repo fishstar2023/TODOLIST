@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 
 import TodoItem from './components/todo/TodoItem.jsx'
 import Pomodoro from './components/todo/Pomodoro.jsx'
+import PomodoroTimer from './components/todo/Pomodoro.jsx'
 import './App.css'
 
 function App() {
@@ -64,12 +65,11 @@ function App() {
   return (
     <div>
       <h1> Urania's To Do List</h1>
-      <Pomodoro />
       <p> Something you need to do...</p>
       <div>
-        <button onClick={() => setFilter('all')}>All</button>
-        <button onClick={() => setFilter('completed')}>Completed</button>
-        <button onClick={() => setFilter('incomplete')}>Incomplete</button>
+        <button onClick={() => setFilter('all')} className={filter==="all" ? "filter active" : "filter-button"}>All</button>
+        <button onClick={() => setFilter('completed')} className={filter==="completed" ? "filter active" : "filter-button"}>Completed</button>
+        <button onClick={() => setFilter('incomplete')} className={filter==="incomplete" ? "filter active" : "filter-button"}>Incomplete</button>
       </div>
       <ol id="list">
         {filteredList.map((item, index) => (
@@ -80,25 +80,24 @@ function App() {
             toggleComplete={toggleComplete}
             editTodo={editTodo}
             deleteTodo={deleteTodo}
-            onPomodoroClick={() => handlePomodoroClick(item)}
+            onPomodoroClick={handlePomodoroClick}
           />
         ))}
       </ol>
 
-     {activePomodoro && (
-       <div>
-         <h3>Pomodoro for: {activePomodoro.task}</h3>
-         <PomodoroTimer />
-       </div>
-     )}
-
-     <button onClick={addTodo}>Submit</button>
       <input
         type="text"
         placeholder="New task..."
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
+      <button onClick={addTodo}>Submit</button>
+      {activePomodoro && (
+       <div>
+         <h3>Pomodoro for: {activePomodoro.task}</h3>
+         <PomodoroTimer />
+       </div>
+     )}
     </div>
   )
 }

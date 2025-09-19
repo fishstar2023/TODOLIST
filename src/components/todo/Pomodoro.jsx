@@ -86,32 +86,32 @@ export default function PomodoroTimer() {
           value={workMinutes}
           onChange={(e) => setWorkMinutes(Number(e.target.value))}
         >
-          <option value="">選擇番茄鐘時間</option>
-          <option value={25}>25 分鐘</option>
-          <option value={45}>45 分鐘</option>
-          <option value={60}>60 分鐘</option>
+          <option value="">Select Pomodoro Time</option>
+          <option value={25}>25 mins</option>
+          <option value={45}>45 mins</option>
+          <option value={60}>60 mins</option>
         </select>
 
         <select
           value={breakMinutes}
           onChange={(e) => setBreakMinutes(Number(e.target.value))}
         >
-          <option value="">選擇休息時間</option>
-          <option value={5}>5 分鐘</option>
-          <option value={10}>10 分鐘</option>
-          <option value={15}>15 分鐘</option>
+          <option value="">break time</option>
+          <option value={5}>5 mins</option>
+          <option value={10}>10 mins</option>
+          <option value={15}>15 mins</option>
         </select>
       </div>
 
       <div className="pomodoro-controls">
         <button className="pomodoro-start" onClick={startTimer}>
-          開始
+          Start
         </button>
         <button className="pomodoro-pause" onClick={pauseTimer}>
-          暫停
+          Stop
         </button>
         <button className="pomodoro-reset" onClick={resetTimer}>
-          重設
+          Reset
         </button>
       </div>
     </div>

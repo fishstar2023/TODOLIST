@@ -1,22 +1,101 @@
+/* 全局 */
 body {
-  background-color: #e1c7c772;
-  font-family: Arial, sans-serif;
+  background-color: #fef6f9; /* 淺粉背景 */
+  font-family: 'Segoe UI', Arial, sans-serif;
   color: #333;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+/* App 標題 */
+h1 {
+  font-size: 2rem;
+  color: #840588;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Todo List */
+ol#list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+li {
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Todo 按鈕 */
+li button {
+  border-radius: 8px;
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+li button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+
+/* 表單與提交 */
+input[type="text"] {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 3px solid #c476d2c2;
+  width: 200px;
+  margin-right: 8px;
+}
+
 button {
   background-color: #c476d2c2;
   color: white;
-  padding: 3px 6px;
+  padding: 6px 12px;
   margin: 2px;
-  border: 1px solid #ccc;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  background-color: #ebc4e2;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.95rem;
   cursor: pointer;
+  transition: all 0.2s;
 }
-.hidden {
-  display: none;
-  user-select: none;
-  pointer-events: none;
+
+.filter-button.active {
+  background-color: #b23a48;
+  color: #d1cbcb;
+  font-weight: bold;
 }
-li {
-   margin-bottom: 5px;
+
+/* 選擇器 */
+select {
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid #f0a1b3;
+  font-size: 0.95rem;
+  background-color: #fff;
 }

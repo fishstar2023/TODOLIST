@@ -32,7 +32,7 @@ export default function TodoItem({ item, index, toggleComplete, editTodo, delete
           </span>
           <button onClick={() => setIsEditing(true)}>Edit</button>
           <button onClick={() => deleteTodo(index)}>Delete</button>
-          <button onClick={() => onPomodoroClick(item, index)}>Pomodoro</button>
+          <button onClick={() => onPomodoroClick(item,index)} className="todo-pomodoro-button" title="Start Pomodoro">🍅</button>
         </>
       )}
     </li>
