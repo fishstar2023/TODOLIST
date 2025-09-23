@@ -1,13 +1,13 @@
-import { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import TodoItem from "./components/todo/TodoItem";
+import PomodoroTimer from "./components/todo/Pomodoro";
+import CalendarPage from "./components/todo/CalendarPage";
+import "./App.css";
 
-import TodoItem from './components/todo/TodoItem.jsx'
-import Pomodoro from './components/todo/Pomodoro.jsx'
-import PomodoroTimer from './components/todo/Pomodoro.jsx'
-import './App.css'
-
-function App() {
+const TodoPage: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
-  const [activePomodoro, setActivePomodoro] = useState(null);
+  const [activePomodoro, setActivePomodoro] = useState<{ id: number; task: string; completed: boolean } | null>(null);
   const [todoList, setTodoList] = useState(() => {
     const savedList = localStorage.getItem('todoList');
     return savedList ? JSON.parse(savedList) : [];
@@ -16,10 +16,8 @@ function App() {
     const savedCounter = localStorage.getItem('counter');
     return savedCounter ? JSON.parse(savedCounter) : 1;
   });
+  const [filter, setFilter] = useState('all');
 
-  const [filter, setFilter] = useState('all'); // New state for filter
-  
-  // Save to localStorage whenever todoList or counter changes
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
     localStorage.setItem('counter', counter.toString());
@@ -34,45 +32,52 @@ function App() {
       setInputValue('');
     }
   };
-  const toggleComplete = (index) => {
+
+  const toggleComplete = (index: number) => {
     const newList = [...todoList];
     newList[index].completed = !newList[index].completed;
     setTodoList(newList);
   };
 
-  const editTodo = (index, newTask) => {
+  const editTodo = (index: number, newTask: string) => {
     const updatedTasks = [...todoList];
     updatedTasks[index].task = newTask;
     setTodoList(updatedTasks);
   };
 
-  const deleteTodo = (index) => {
-    const newList = todoList.filter((_, i) => i !== index);
+  const deleteTodo = (index: number) => {
+    const newList = todoList.filter((_: any, i: number) => i !== index);
     setTodoList(newList);
   };
 
-  const handlePomodoroClick = (item) => {
+  const handlePomodoroClick = (item: { id: number; task: string; completed: boolean }) => {
     setActivePomodoro(item);
   };
 
-  const filteredList = useMemo(() => todoList.filter(item => {
+  const filteredList = useMemo(() => todoList.filter((item: { completed: boolean }) => {
     if (filter === 'all') return true;
     if (filter === 'completed') return item.completed;
     if (filter === 'incomplete') return !item.completed;
   }), [todoList, filter]);
 
- 
   return (
     <div>
-      <h1> Urania's To Do List</h1>
-      <p> Something you need to do...</p>
+      <h1>Urania's To Do List</h1>
+      <p>Something you need to do...</p>
+      
+      <div className="tab-links" style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "blue" }}>🏠 Todo</Link>
+        <Link to="/calendar" style={{ textDecoration: "none", color: "blue" }}>📅 Calendar</Link>
+      </div>
+
       <div>
         <button onClick={() => setFilter('all')} className={filter==="all" ? "filter active" : "filter-button"}>All</button>
         <button onClick={() => setFilter('completed')} className={filter==="completed" ? "filter active" : "filter-button"}>Completed</button>
         <button onClick={() => setFilter('incomplete')} className={filter==="incomplete" ? "filter active" : "filter-button"}>Incomplete</button>
       </div>
+
       <ol id="list">
-        {filteredList.map((item, index) => (
+        {filteredList.map((item: { id: number; task: string; completed: boolean }, index: number) => (
           <TodoItem
             key={index}
             item={item}
@@ -96,19 +101,23 @@ function App() {
       {activePomodoro && (
         <div className="pomodoro-container">
           <div className="pomodoro-header">
-            <h3 className="pomodoro-header h3">
-              🍅Pomodoro for: {activePomodoro.task}
-            </h3>
-           <button 
-            className="pomodoro-close" 
-            onClick={() => setActivePomodoro(null)}   
-              >✖</button>
-       </div>
-       <PomodoroTimer />
-       </div>
-     )}
+            <h3 className="pomodoro-header h3">🍅 Pomodoro for: {activePomodoro.task}</h3>
+            <button className="pomodoro-close" onClick={() => setActivePomodoro(null)}>✖</button>
+          </div>
+          <PomodoroTimer onClose={() => setActivePomodoro(null)} />
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default App
+const App: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<TodoPage />} />
+      <Route path="/calendar" element={<CalendarPage />} />
+    </Routes>
+  );
+};
+
+export default App;

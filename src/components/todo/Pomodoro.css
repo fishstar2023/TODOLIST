@@ -71,11 +71,11 @@
 }
 
 .todo-pomodoro-button {
-  font-size:1.5 rem;
+  font-size: 1.5rem;
   background: none;
   border: none;
   cursor: pointer;
-  transition :transform 0.2s,filter 0.2s;
+  transition: transform 0.2s, filter 0.2s;
 }
 
 .todo-pomodoro-button:hover {

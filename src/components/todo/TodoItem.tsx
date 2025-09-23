@@ -1,14 +1,33 @@
 import { useState } from 'react'
 
-export default function TodoItem({ item, index, toggleComplete, editTodo, deleteTodo,onPomodoroClick }) {
+interface ITodo { id: number; task: string; completed: boolean; }
+
+interface ITodoItemProps {
+  item: ITodo;
+  index: number;
+  toggleComplete: (index: number) => void;
+  editTodo: (index: number, newTask: string) => void;
+  deleteTodo: (index: number) => void;
+  onPomodoroClick: (item: ITodo, index: number) => void;
+}
+
+export default function TodoItem(
+  {
+    item,
+    index,
+    toggleComplete,
+    editTodo,
+    deleteTodo,
+    onPomodoroClick
+  }: ITodoItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(item.task);
-  
+
   const saveEdit = () => {
     editTodo(index, editedTask);
     setIsEditing(false);
   };
-  
+
   return (
     <li>
       <input
@@ -32,9 +51,11 @@ export default function TodoItem({ item, index, toggleComplete, editTodo, delete
           </span>
           <button onClick={() => setIsEditing(true)}>Edit</button>
           <button onClick={() => deleteTodo(index)}>Delete</button>
-          <button onClick={() => onPomodoroClick(item,index)} className="todo-pomodoro-button" title="Start Pomodoro">🍅</button>
+          <button onClick={() => onPomodoroClick(item, index)} className="todo-pomodoro-button" title="Start Pomodoro">🍅</button>
         </>
       )}
     </li>
   );
 }
+
+export type { ITodo };
