@@ -2,6 +2,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layout";
 import App from "./App";
+import CalendarPage from "./components/todo/CalendarPage";
 
 const router = createBrowserRouter([
   {
@@ -9,6 +10,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <App /> },
+      { path: "/calendar", element: <CalendarPage /> },
     ],
   },
 ]);

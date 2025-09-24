@@ -1,0 +1,255 @@
+body, .calendar-container, .fc {
+  font-family: 'Patrick Hand', cursive !important;
+  color: #4B3F4D;
+  background: linear-gradient(180deg, #F1ECF1, #EDE7ED);
+}
+
+.calendar-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4B3F4D;
+}
+
+.fc .fc-toolbar button {
+  font-family: 'Patrick Hand', cursive !important;
+  font-size: 14px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #DBD1DC, #E2DAE3);
+  color: #4B3F4D;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.fc .fc-toolbar button:hover {
+  background: linear-gradient(145deg, #D2C5D3, #DBD1DC);
+}
+
+.fc-daygrid-day {
+  background: #FFFFFF;
+  border: 1px solid #E2DAE3;
+}
+
+.fc-day-today {
+  background: #EFEDF9 !important;
+  border: 2px solid #CEC9E5 !important;
+}
+
+.fc-event {
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 2px 6px;
+  font-size: 14px;
+  color: #4B3F4D !important;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: linear-gradient(145deg, #E2DAE3, #E8E1E9);
+  padding: 28px;
+  border-radius: 14px;
+  width: 360px;
+  max-width: 92%;
+  font-family: 'Patrick Hand', cursive;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25),
+              inset 0 1px 3px rgba(255,255,255,0.5);
+  border: 1px solid #DBD1DC;
+}
+
+.modal h3 {
+  margin-bottom: 14px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #4B3F4D;
+  text-align: center;
+}
+
+.modal input[type="text"], 
+.modal input[type="date"], 
+.modal select {
+  width: calc(100% - 24px);
+  box-sizing: border-box;
+  padding: 8px 12px;
+  margin: 14px 0;
+  border-radius: 8px;
+  border: 1px solid #D2C5D3;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 16px;
+  background: linear-gradient(145deg, #FFFFFF, #F1ECF1);
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.modal-buttons .left-buttons,
+.modal-buttons .right-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.modal .new-category input {
+  width: calc(100% - 24px);
+  box-sizing: border-box;
+  padding: 8px 12px;
+}
+
+.save-btn {
+  background: linear-gradient(145deg, #CEC9E5, #DCD7ED);
+  color: #4B3F4D;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+.save-btn:hover { 
+  background: linear-gradient(145deg, #DCD7ED, #E4E1F2);
+}
+
+.delete-btn {
+  background: linear-gradient(145deg, #E2DAE3, #E8E1E9);
+  color: #4B3F4D;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+}
+.delete-btn:hover { 
+  background: linear-gradient(145deg, #E8E1E9, #EDE7ED);
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  z-index: 10;
+  position: relative;
+}
+
+.back-button, .add-button {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 14px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+  transition: background-color 0.2s ease, transform 0.2s;
+}
+
+.back-button {
+  background-color: #b59dc3;
+  color: #fafafa;
+}
+.back-button:hover { transform: translateY(-2px); background-color: #a285b2; }
+
+.add-button {
+  background-color: #d4a5c4;
+  color: #fafafa;
+}
+.add-button:hover { transform: translateY(-2px); background-color: #c48bb3; }
+
+.category-tags {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.category-tag {
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #4B3F4D;
+}
+
+.category-tag button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-category:hover {
+  color: red;
+}
+
+.edit-category:hover {
+  color: blue;
+}
+
+.edit-category-section {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.edit-category-section input[type="text"] {
+  flex: 1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.edit-category-section input[type="color"] {
+  width: 40px;
+  height: 30px;
+  border: none;
+  padding: 0;
+}
+
+.edit-category-section button {
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  background: #CEC9E5;
+}
+
+.edit-category-section button:hover {
+  background: #DCD7ED;
+}
+
+.cancel-btn {
+  background:  #e8c8d0; /* 你想要的底色 */
+  color: #4B3F4D;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(145deg, #EFD5DC, #F2D5CF); /* hover 顏色 */
+}
