@@ -1,0 +1,81 @@
+.fatloss-container {
+  display: flex;
+  gap: 24px;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.fatloss-left {
+  width: 300px;
+  padding: 16px;
+  background-color: #f8f4f8;
+  border-radius: 8px;
+}
+
+.fatloss-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-container {
+  margin-bottom: 16px; /* 日曆與表單間距 */
+}
+
+.fatloss-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.fatloss-form .form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fatloss-form .collapse-btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+}
+
+.fatloss-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.fatloss-form input,
+.fatloss-form textarea {
+  width: 100%;
+  min-height: 32px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  resize: none;
+}
+
+.fatloss-form-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.fatloss-form-buttons button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.fatloss-form-buttons button:first-child { background-color: #4caf50; color: #fff; } /* Save */
+.fatloss-form-buttons button:nth-child(2) { background-color: #f44336; color: #fff; } /* Delete */
+.fatloss-form-buttons button:last-child { background-color: #9e9e9e; color: #fff; } /* Cancel */
