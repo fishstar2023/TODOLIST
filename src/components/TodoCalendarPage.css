@@ -1,0 +1,28 @@
+/* TodoCalendarPage.css - 分類顏色標籤 */
+.todo-category {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: white;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+/* 可依分類給顏色，例如 */
+.todo-category.Work {
+  background-color: #A88FC8;
+}
+
+.todo-category.Life {
+  background-color: #B19F8D;
+}
+
+.todo-category.Hobby {
+  background-color: #CBB592;
+}
+
+/* 其他未分類或自訂分類 */
+.todo-category.Other {
+  background-color: #E1A6A2;
+}
