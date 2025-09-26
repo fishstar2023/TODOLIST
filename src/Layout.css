@@ -1,0 +1,90 @@
+/* Layout.css */
+
+.layout-container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Patrick Hand', cursive;
+}
+
+/* Sidebar 左側導航 */
+.sidebar {
+  width: 200px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #F1ECF1, #EDE7ED);
+  padding: 20px;
+  box-sizing: border-box;
+  border-right: 1px solid #D2C5D3;
+  transition: width 0.3s, padding 0.3s;
+  position: relative;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+  padding: 10px;
+  border-right: none;
+}
+
+/* 收合/展開按鈕 */
+.toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: #c476d2c2;
+  color: white;
+  font-weight: bold;
+}
+
+/* Sidebar 標題 */
+.app-title {
+  margin-bottom: 20px;
+  color: #4B3F4D;
+}
+
+/* Tabs */
+.tabs {
+  list-style: none;
+  padding: 0;
+}
+
+.tabs li {
+  margin-bottom: 12px;
+}
+
+.tabs li a {
+  text-decoration: none;
+  color: #4B3F4D;
+  padding: 6px 12px;
+  display: block;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.tabs li a.active {
+  color: #9873adff;
+  font-weight: bold;
+  background: #E2DAE3;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #F9F7F9, #EFECEC);
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* 限制內文寬度 */
+.content-container {
+  width: 100%;
+  max-width: 1100px;
+  min-width: 800px;
+  margin: 0 auto;
+}
