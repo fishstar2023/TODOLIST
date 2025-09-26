@@ -1,14 +1,22 @@
 body, .calendar-container, .fc {
   font-family: 'Patrick Hand', cursive !important;
   color: #4B3F4D;
+  /* width: min-content; */
   background: linear-gradient(180deg, #F1ECF1, #EDE7ED);
 }
 
-.calendar-container {
-  max-width: 1100px;
+
+/* FullCalendar 自動撐滿 */
+.fc {
+  width: 100% ;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
 }
+
+.fc table {
+  width: 100% ;
+  table-layout: fixed; /* 避免列寬亂掉 */
+/}
 
 .fc .fc-toolbar-title {
   font-size: 20px;
@@ -67,7 +75,7 @@ body, .calendar-container, .fc {
   background: linear-gradient(145deg, #E2DAE3, #E8E1E9);
   padding: 28px;
   border-radius: 14px;
-  width: 360px;
+  width: 360px; 
   max-width: 92%;
   font-family: 'Patrick Hand', cursive;
   box-shadow: 0 10px 24px rgba(0,0,0,0.25),
@@ -201,11 +209,11 @@ body, .calendar-container, .fc {
 }
 
 .delete-category:hover {
-  color: red;
+  color: rgb(200, 88, 88);
 }
 
 .edit-category:hover {
-  color: blue;
+  color: rgb(87, 87, 160);
 }
 
 .edit-category-section {
@@ -253,3 +261,4 @@ body, .calendar-container, .fc {
 .cancel-btn:hover {
   background: linear-gradient(145deg, #EFD5DC, #F2D5CF); /* hover 顏色 */
 }
+

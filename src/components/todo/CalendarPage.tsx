@@ -27,18 +27,28 @@ const CalendarPage: React.FC = () => {
 
   const [events, setEvents] = useState<EventType[]>(() => {
     const saved = localStorage.getItem("events");
-    return saved ? JSON.parse(saved) : [
-      { id: "1", title: "Sample Event", date: "2025-09-25", category: "Work", color: fixedColors[0] },
-    ];
+    return saved
+      ? JSON.parse(saved)
+      : [
+          {
+            id: "1",
+            title: "Sample Event",
+            date: "2025-09-25",
+            category: "Work",
+            color: fixedColors[0],
+          },
+        ];
   });
 
   const [categories, setCategories] = useState<CategoryType[]>(() => {
     const saved = localStorage.getItem("categories");
-    return saved ? JSON.parse(saved) : [
-      { name: "Work", color: fixedColors[0] },
-      { name: "Life", color: fixedColors[1] },
-      { name: "Hobby", color: fixedColors[2] },
-    ];
+    return saved
+      ? JSON.parse(saved)
+      : [
+          { name: "Work", color: fixedColors[0] },
+          { name: "Life", color: fixedColors[1] },
+          { name: "Hobby", color: fixedColors[2] },
+        ];
   });
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -75,38 +85,40 @@ const CalendarPage: React.FC = () => {
       title: clickInfo.event.title,
       date: clickInfo.event.startStr,
       category: clickInfo.event.extendedProps.category,
-      color: clickInfo.event.backgroundColor
+      color: clickInfo.event.backgroundColor,
     });
     setEventTitle(clickInfo.event.title);
     setEventDate(clickInfo.event.startStr);
-    setEventCategory(clickInfo.event.extendedProps.category || categories[0]?.name);
+    setEventCategory(
+      clickInfo.event.extendedProps.category || categories[0]?.name
+    );
     setModalOpen(true);
   };
 
   // 儲存事件
   const handleSave = () => {
     if (!eventTitle.trim() || !eventDate) return;
-    const cat = categories.find(c => c.name === eventCategory);
+    const cat = categories.find((c) => c.name === eventCategory);
     const color = cat?.color || fixedColors[0];
 
     if (modalEvent) {
-      setEvents(prev =>
-        prev.map(e =>
+      setEvents((prev) =>
+        prev.map((e) =>
           e.id === modalEvent.id
             ? { ...e, title: eventTitle, date: eventDate, category: eventCategory, color }
             : e
         )
       );
     } else {
-      setEvents(prev => [
+      setEvents((prev) => [
         ...prev,
         {
-          id: String(prev.length + 1),
+          id: String(Date.now()),
           title: eventTitle,
           date: eventDate,
           category: eventCategory,
-          color
-        }
+          color,
+        },
       ]);
     }
     setModalOpen(false);
@@ -115,27 +127,32 @@ const CalendarPage: React.FC = () => {
   // 刪除事件
   const handleDelete = () => {
     if (!modalEvent) return;
-    setEvents(prev => prev.filter(e => e.id !== modalEvent.id));
+    setEvents((prev) => prev.filter((e) => e.id !== modalEvent.id));
     setModalOpen(false);
   };
 
   // 新增分類
   const handleAddCategory = (name: string) => {
     const trimmed = name.trim();
-    if (!trimmed || categories.find(c => c.name === trimmed)) return;
+    if (!trimmed || categories.find((c) => c.name === trimmed)) return;
 
     // 選擇尚未使用的顏色
-    const usedColors = categories.map(c => c.color);
-    const color = fixedColors.find(c => !usedColors.includes(c)) || fixedColors[0];
+    const usedColors = categories.map((c) => c.color);
+    const color =
+      fixedColors.find((c) => !usedColors.includes(c)) || fixedColors[0];
 
-    setCategories(prev => [...prev, { name: trimmed, color }]);
+    setCategories((prev) => [...prev, { name: trimmed, color }]);
     setEventCategory(trimmed);
   };
 
   // 刪除分類
   const handleDeleteCategory = (name: string) => {
-    setCategories(prev => prev.filter(c => c.name !== name));
-    setEvents(prev => prev.map(e => (e.category === name ? { ...e, category: "", color: "" } : e)));
+    setCategories((prev) => prev.filter((c) => c.name !== name));
+    setEvents((prev) =>
+      prev.map((e) =>
+        e.category === name ? { ...e, category: "", color: "" } : e
+      )
+    );
   };
 
   // 編輯分類名稱
@@ -149,18 +166,24 @@ const CalendarPage: React.FC = () => {
     const trimmed = editCategoryName.trim();
     if (!trimmed) return;
 
-    setCategories(prev =>
-      prev.map(c =>
-        c.name === editingCategory
-          ? { name: trimmed, color: c.color } // 固定顏色
-          : c
+    // 檢查新名稱是否已存在
+    if (
+      categories.some(
+        (c) => c.name === trimmed && c.name !== editingCategory
+      )
+    )
+      return;
+
+    setCategories((prev) =>
+      prev.map((c) =>
+        c.name === editingCategory ? { name: trimmed, color: c.color } : c
       )
     );
 
-    setEvents(prev =>
-      prev.map(e =>
+    setEvents((prev) =>
+      prev.map((e) =>
         e.category === editingCategory
-          ? { ...e, category: trimmed, color: e.color } // 固定顏色
+          ? { ...e, category: trimmed, color: e.color }
           : e
       )
     );
@@ -169,85 +192,140 @@ const CalendarPage: React.FC = () => {
   };
 
   return (
-    <div className="calendar-container">
-      <h1 className="calendar-title">📅 Calendar</h1>
+    <div className="content-container">
+      <h1 className="page-title">📅 Calendar</h1>
 
       <div className="button-group">
-        <button className="back-button" onClick={() => navigate("/")}>🏠 Back to Home</button>
-        <button className="add-button" onClick={handleAddClick}>➕ Add Event</button>
+        <button className="back-button" onClick={() => navigate("/")}>
+          🏠 Back to Home
+        </button>
+        <button className="add-button" onClick={handleAddClick}>
+          ➕ Add Event
+        </button>
       </div>
 
-      <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        events={events.map(e => ({
-          ...e,
-          backgroundColor: e.color,
-          borderColor: e.color,
-          textColor: "#4B3F4D"
-        }))}
-        eventClick={handleEventClick}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,dayGridWeek,dayGridDay",
-        }}
-        dayMaxEventRows={5}
-        height="auto"
-      />
+      <div className="calendar-wrapper">
+        <FullCalendar
+          plugins={[dayGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          events={events.map((e) => ({
+            ...e,
+            backgroundColor: e.color,
+            borderColor: e.color,
+            textColor: "#4B3F4D",
+          }))}
+          eventClick={handleEventClick}
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,dayGridWeek,dayGridDay",
+          }}
+          dayMaxEventRows={5}
+          height="auto"
+        />
 
-      {modalOpen && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h3>{modalEvent ? "Edit Event" : "Add Event"}</h3>
-            <input type="text" value={eventTitle} onChange={e => setEventTitle(e.target.value)} placeholder="Event title" />
-            <input type="date" value={eventDate} onChange={e => setEventDate(e.target.value)} />
+        {modalOpen && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <h3>{modalEvent ? "Edit Event" : "Add Event"}</h3>
+              <input
+                type="text"
+                value={eventTitle}
+                onChange={(e) => setEventTitle(e.target.value)}
+                placeholder="Event title"
+              />
+              <input
+                type="date"
+                value={eventDate}
+                onChange={(e) => setEventDate(e.target.value)}
+              />
 
-            <select value={eventCategory} onChange={e => setEventCategory(e.target.value)}>
-              {categories.map(c => (
-                <option key={c.name} value={c.name}>{c.name}</option>
-              ))}
-            </select>
+              <select
+                value={eventCategory}
+                onChange={(e) => setEventCategory(e.target.value)}
+              >
+                {categories.map((c) => (
+                  <option key={c.name} value={c.name}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
 
-            <div className="new-category">
-              <input type="text" placeholder="New category" onKeyDown={e => {
-                if (e.key === "Enter") {
-                  handleAddCategory((e.target as HTMLInputElement).value);
-                  (e.target as HTMLInputElement).value = "";
-                }
-              }} />
-            </div>
-
-            <div className="modal-buttons">
-              <div className="left-buttons">
-                {modalEvent && <button onClick={handleDelete} className="delete-btn">Delete</button>}
-                <button onClick={() => setModalOpen(false)} className="cancel-btn">Cancel</button>
+              <div className="new-category">
+                <input
+                  type="text"
+                  placeholder="New category"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleAddCategory((e.target as HTMLInputElement).value);
+                      (e.target as HTMLInputElement).value = "";
+                    }
+                  }}
+                />
               </div>
-              <div className="right-buttons">
-                <button className="save-btn" onClick={handleSave}>Save</button>
+
+              <div className="modal-buttons">
+                <div className="left-buttons">
+                  {modalEvent && (
+                    <button
+                      onClick={handleDelete}
+                      className="delete-btn"
+                    >
+                      Delete
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setModalOpen(false)}
+                    className="cancel-btn"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div className="right-buttons">
+                  <button className="save-btn" onClick={handleSave}>
+                    Save
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div className="category-tags">
-              {categories.map(c => (
-                <span key={c.name} className="category-tag" style={{ backgroundColor: c.color }}>
-                  {c.name}
-                  <button className="edit-category" onClick={() => startEditCategory(c)}>✎</button>
-                  <button className="delete-category" onClick={() => handleDeleteCategory(c.name)}>×</button>
-                </span>
-              ))}
-            </div>
-
-            {editingCategory && (
-              <div className="edit-category-section">
-                <input type="text" value={editCategoryName} onChange={e => setEditCategoryName(e.target.value)} />
-                <button onClick={saveEditCategory}>Save</button>
+              <div className="category-tags">
+                {categories.map((c) => (
+                  <span
+                    key={c.name}
+                    className="category-tag"
+                    style={{ backgroundColor: c.color }}
+                  >
+                    {c.name}
+                    <button
+                      className="edit-category"
+                      onClick={() => startEditCategory(c)}
+                    >
+                      ✎
+                    </button>
+                    <button
+                      className="delete-category"
+                      onClick={() => handleDeleteCategory(c.name)}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
               </div>
-            )}
 
+              {editingCategory && (
+                <div className="edit-category-section">
+                  <input
+                    type="text"
+                    value={editCategoryName}
+                    onChange={(e) => setEditCategoryName(e.target.value)}
+                  />
+                  <button onClick={saveEditCategory}>Save</button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
