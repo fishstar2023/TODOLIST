@@ -1,9 +1,9 @@
 // src/components/TodoCalendarPage.tsx
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
-import TodoItem, { ITodo } from "./todo/TodoItem";
-import TodoPage from "./todo/TodoPage";
 
+import TodoItem, { ITodo } from "./todo/TodoItem";
+import PomodoroTimer from "./todo/Pomodoro";
 
 interface ITodoWithMeta extends ITodo {
   date: string;
@@ -76,8 +76,10 @@ const TodoCalendarPage: React.FC = () => {
     setTodos(prev => prev.filter((_, i) => i !== index));
   };
 
+  const [activePomodoro, setActivePomodoro] = useState<ITodoWithMeta | null>(null);
+
   const onPomodoroClick = (item: ITodoWithMeta, index: number) => {
-    alert(`Start Pomodoro for: ${item.task}`);
+    setActivePomodoro(item);
   };
 
   return (
@@ -105,8 +107,6 @@ const TodoCalendarPage: React.FC = () => {
         </select>
         <button onClick={addTodo} className="submit-btn">Add</button>
       </div>
-
-      {/* Todo List */}
       <ul id="list">
         {todos.map((item, index) => (
           <li key={item.id} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -125,6 +125,15 @@ const TodoCalendarPage: React.FC = () => {
           </li>
         ))}
       </ul>
+      {activePomodoro && (
+        <div className="pomodoro-container">
+          <div className="pomodoro-header">
+            <h3>🍅 Pomodoro for: {activePomodoro.task}</h3>
+            <button className="pomodoro-close" onClick={() => setActivePomodoro(null)}>✖</button>
+          </div>
+          <PomodoroTimer onClose={() => setActivePomodoro(null)} />
+        </div>
+      )}
     </div>
   );
 };

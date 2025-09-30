@@ -1,7 +1,7 @@
 body, .calendar-container, .fc {
   font-family: 'Patrick Hand', cursive !important;
   color: #4B3F4D;
-  /* width: min-content; */
+  width: min-content;
   background: linear-gradient(180deg, #F1ECF1, #EDE7ED);
 }
 

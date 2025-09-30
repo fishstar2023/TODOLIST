@@ -1,6 +1,6 @@
 // src/router.tsx
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "./layout";
+import Layout from "./Layout";
 import App from "./App";
 import CalendarPage from "./components/todo/CalendarPage";
 
