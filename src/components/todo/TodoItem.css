@@ -1,0 +1,46 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;          /* 增加上下間距 */
+  padding: 10px 12px;      /* 讓每一列更有空間 */
+  border-bottom: 1px solid #ddd;
+}
+
+.todo-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;               /* 左側 checkbox 與文字之間的距離更寬 */
+  font-size: 16px;         /* 調整字體大小 */
+  line-height: 1.6;        /* 增加文字行高 */
+}
+
+.todo-content input[type="text"] {
+  padding: 6px 8px;        /* 編輯框更大 */
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.todo-content .completed {
+  text-decoration: line-through ;
+  color: #908a8a;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 12px;               /* 右邊按鈕之間更寬 */
+}
+
+.todo-actions button {
+  padding: 6px 10px;       /* 按鈕點擊範圍更大 */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.todo-actions button:hover {
+  background-color: #95c26d;
+}

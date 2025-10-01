@@ -1,28 +1,260 @@
-/* TodoCalendarPage.css - 分類顏色標籤 */
+/* 容器 */
+.todo-calendar-container {
+  width: min-content;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Patrick Hand', cursive; 
+}
+.todo-calendar-container :is(p, span, li, h1, h2, h3, h4, h5, h6) {
+  font-family: 'Patrick Hand', 'Noto Sans TC', sans-serif;
+}
+
+/* 左右布局 */
+.todo-calendar-grid {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; 
+}
+
+/* 左側：Todo 列表 70% */
+.todo-left {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 標題置中 */
+.todo-title, .todo-left h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #2e1c1c;
+}
+
+/* Filter 按鈕 */
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.filter-button {
+  padding: 6px 12px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background-color: rgb(156, 171, 239);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-button.active {
+  background-color: #A88FC8;
+  color: #2e1c1c;
+  border-color: #A88FC8;
+}
+
+/* Todo 列表 */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.todo-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+  margin-bottom: 6px;
+}
+.todo-left-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.todo-task {
+  flex: 1;
+}
+.todo-date {
+  font-size: 0.8rem;
+  color: #777;
+}
 .todo-category {
   display: inline-block;
   padding: 2px 8px;
   border-radius: 8px;
   font-size: 0.8rem;
-  color: white;
   font-weight: bold;
-  margin-right: 6px;
+  white-space: nowrap;
+}
+.todo-category.Work { background-color: #A88FC8; color: white; }
+.todo-category.Life { background-color: #B19F8D; color: white; }
+.todo-category.Hobby { background-color: #CBB592; color: white; }
+.todo-category.Other { background-color: #E1A6A2; color: white; }
+
+/* 輸入區塊 */
+.todo-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
 }
 
-/* 可依分類給顏色，例如 */
-.todo-category.Work {
+/* 輸入區塊容器 */
+.todo-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 1px;
+  margin-bottom: 10px; /* ✅ 跟底下的 list 保持距離 */
+}
+
+/* 裡面的 input / select 正常樣式 */
+.todo-input input,
+.todo-input select {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  font-size: 0.9rem;
+}
+
+/* 按鈕獨立樣式 */
+.submit-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
   background-color: #A88FC8;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  flex: 0; /* ✅ 不要被拉長 */
 }
 
-.todo-category.Life {
-  background-color: #B19F8D;
+
+/* 右側：日曆 30% */
+.todo-right {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 400px;
 }
 
-.todo-category.Hobby {
-  background-color: #CBB592;
+/* 月份切換 */
+.month-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.month-navigation button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: #A88FC8;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.month-navigation button:hover {
+  background-color: #8050a0;
+}
+.month-navigation .month-label {
+  flex: 1;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #2e1c1c;
 }
 
-/* 其他未分類或自訂分類 */
-.todo-category.Other {
-  background-color: #E1A6A2;
+/* 日曆格子固定大小 */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 35px); /* 7 列 */
+  grid-auto-rows: 35px; /* 每列高度固定 */
+  width: auto;
+  gap: 4px;
+}
+.calendar-day {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  background: #fff;
+  transition: all 0.2s;
+}
+
+.calendar-day:hover {
+  background: #f1f1f1;
+}
+.calendar-day.selected {
+  border-color: #A88FC8;
+  background-color: #f3e8ff;
+}
+/* 日曆部分 */
+.calendar-container {
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 5px; /* 與待辦分開 */
+}
+
+/* 當日待辦列表 */
+.date-todos-list {
+  width: 100%;
+  max-height: 140px; /* ✅ 固定清單高度 */
+  overflow-y: auto;
+  margin-top: 8px;
+  border-top: 1px solid #ccc;
+  padding-top: 8px;
+}
+/* 日期數字 */
+.calendar-day span {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 35px);
+  gap: 4px;
+  margin-bottom: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+/* 小點區域 */
+.day-todos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 2px;
+}
+.event-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #A88FC8;
+  border-radius: 50%;
+}
+
+/* 當日待辦列表滾動 */
+.date-todos-list {
+  width: 100%;
+  max-height: 140px; /* 固定顯示高度 */
+  overflow-y: auto;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 8px;
 }

@@ -79,6 +79,7 @@ const TodoPage: React.FC = () => {
             editTodo={editTodo}
             deleteTodo={deleteTodo}
             onPomodoroClick={handlePomodoroClick}
+            categories={[]}            
           />
         ))}
       </ol>
@@ -92,10 +93,10 @@ const TodoPage: React.FC = () => {
       <button onClick={addTodo}>Submit</button>
 
       {activePomodoro && (
-        <div className="pomodoro-container">
+        <div className="pomodoro-outsidecontainer">
           <div className="pomodoro-header">
             <h3>🍅 Pomodoro for: {activePomodoro.task}</h3>
-            <button className="pomodoro-close" onClick={() => setActivePomodoro(null)}>✖</button>
+            {/* <button className="pomodoro-close" onClick={() => setActivePomodoro(null)}>✖</button> */}
           </div>
           <PomodoroTimer onClose={() => setActivePomodoro(null)} />
         </div>

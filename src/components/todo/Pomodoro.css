@@ -1,4 +1,4 @@
-.pomodoro-container {
+.pomodoro-outsidecontainer {
   max-width: 400px;
   margin: 20px auto;
   padding: 10px;
@@ -7,20 +7,28 @@
   background-color: #f0dcf2a4;
   border: 2px solid #d6b2d4;
 }
+.pomodoro-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fafafaa4;
+}
 
 .pomodoro-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  color:#5a2f7a
 }
 
 .pomodoro-title {
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #650276;
+  color: #712663;
 }
 
 .pomodoro-timer {
@@ -103,4 +111,78 @@
   font-size: 1.3rem;
   font-weight: bold;
   color: #650276;
+}
+
+/* 圓形進度條 */
+.pomodoro-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.progress-bg {
+  stroke: #efd8d8;
+}
+
+.progress-bar {
+  stroke: url(#gradient);
+  stroke: #a483c6;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.5s linear;
+}
+
+.progress-text {
+  font-size: 25px;
+  font-weight: bold;
+  fill: #3a1f55;
+}
+
+.pomodoro-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #eddaeb;
+  padding: 20px 30px;
+  border: 2px solid #14164e;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-close {
+  border: none;
+  background: transparent;
+  font-size: 25px;
+  cursor: pointer;
+  color: #07213a;
+}
+
+
+.pomodoro-notification.fade-in {
+  opacity: 1;
+}
+
+.pomodoro-notification.fade-out {
+  opacity: 0;
+}
+
+.pomodoro-notification button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
 }
