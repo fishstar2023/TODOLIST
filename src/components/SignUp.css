@@ -1,0 +1,208 @@
+/* -----------------------------
+   SignUp 容器
+---------------------------------*/
+.signup-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* 小人靠山底 */
+  min-height: 100vh;
+  background: linear-gradient(to top, #81d4fa, #e1f5fe);
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* 只限定 SignUp 表單字體 */
+.signup-container *,
+.signup-container input,
+.signup-container select,
+.signup-container button,
+.signup-container textarea {
+  font-family: 'Patrick Hand', cursive;
+}
+
+/* -----------------------------
+   天空、太陽、雲
+---------------------------------*/
+.sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* 太陽 */
+.sun {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, #fff176 0%, #fbc02d 80%);
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 0 60px 20px rgba(255, 235, 59, 0.5);
+}
+.sun::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,235,59,0.3) 0%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+.cloud1 { top: 20px; left: -120px; width: 100px; height: 60px; animation: cloudMove 60s linear infinite; }
+.cloud2 { top: 80px; left: -200px; width: 140px; height: 80px; animation: cloudMove 90s linear infinite; }
+@keyframes cloudMove { 0% { transform: translateX(0);} 100% { transform: translateX(160vw);} }
+
+/* -----------------------------
+   山脈
+---------------------------------*/
+.mountain-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(to top, #4caf50, #81c784);
+  z-index: 1;
+}
+
+/* -----------------------------
+   健行小人
+---------------------------------*/
+.hiker {
+  position: absolute;
+  bottom: 236px; /* 山高 300px - 小人高 64px */
+  right: 60px;
+  width: 64px;
+  height: 64px;
+  z-index: 2;
+  animation: walk 2s infinite alternate ease-in-out;
+}
+@keyframes walk {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* -----------------------------
+   SignUp 表單卡片
+---------------------------------*/
+.signup-card {
+  position:absolute;
+  z-index: 3;
+  background: white;
+  padding: 2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 420px;
+  animation: fadeIn 0.8s ease-in-out;
+  margin-bottom: 100px; /* 與底部保持距離 */
+}
+
+.signup-card h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #2e7d32;
+}
+.signup-card p {
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+/* -----------------------------
+   表單欄位統一樣式
+---------------------------------*/
+.signup-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.signup-card label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* ✅ 只影響 SignUp 表單的 input / select */
+.signup-card input[type="text"],
+.signup-card input[type="email"],
+.signup-card input[type="number"],
+.signup-card select {
+  width: 100%;
+  height: 2.8rem;
+  margin-top: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  font-family: 'Patrick Hand', cursive;
+  background-color: #fff;
+  color: #333;
+  box-sizing: border-box;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.signup-card input::placeholder,
+.signup-card select::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+/* checkbox */
+.signup-card .checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.signup-card .checkbox input[type="checkbox"] {
+  width: auto;
+  height: auto;
+}
+
+/* 按鈕 */
+.signup-card .submit-btn {
+  background-color: #2e7d32;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.signup-card .submit-btn:hover { background-color: #1b5e20; }
+
+/* -----------------------------
+   動畫效果
+---------------------------------*/
+@keyframes fadeIn { 
+  from { opacity: 0; transform: translateY(10px); } 
+  to { opacity: 1; transform: translateY(0); } 
+}
