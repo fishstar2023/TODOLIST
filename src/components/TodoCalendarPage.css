@@ -16,9 +16,9 @@
   align-items: flex-start; 
 }
 
-/* 左側：Todo 列表 70% */
+
 .todo-left {
-  flex: 0 0 30%;
+  flex: 0 0 40%;
   display: flex;
   flex-direction: column;
 }

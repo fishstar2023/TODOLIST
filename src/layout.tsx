@@ -9,6 +9,7 @@ const tabs = [
   { path: "/calendar", label: "📅 Calendar" },
   { path: "/fatloss", label: "📊 Fat Loss" },
   { path: "/todo-calendar", label: "🗓️ Todo Calendar" },
+  { path: "/signup", label: "🏞️ Hiking Survey Program" }
 ];
 
 const Layout: React.FC = () => {
